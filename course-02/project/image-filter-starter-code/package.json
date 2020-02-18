@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
+    "winbuild": "@powershell if (Test-Path www) { Remove-Item www } && tsc && @powershell Copy-Item -Path package.json -Destination www\\package.json && @powershell New-Item -Path www -Name tmp -ItemType directory && @powershell Compress-Archive -Path www/* -Destination www\\Archive.zip",
     "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "repository": {
