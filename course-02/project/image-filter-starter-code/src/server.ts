@@ -32,7 +32,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //! END @TODO1
 
   app.get( "/filteredimage", async ( req, res ) => {
-    const image_url = req.query.image_url;
+    const image_url: string = req.query.image_url;
 
     if (!image_url) {
       res.status(400).send("Invalid image_url query parameter.")
@@ -40,7 +40,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     }
 
     filterImageFromURL(image_url)
-        .then((filteredImage) => {
+        .then((filteredImage: string) => {
           res.sendFile(filteredImage, (err) => {
             if (err) {
                 console.error(`There was a problem sending file: ${filteredImage}`, err.message);
