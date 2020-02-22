@@ -41,7 +41,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     filterImageFromURL(image_url)
         .then((filteredImage: string) => {
-          res.sendFile(filteredImage, (err) => {
+          res.status(200).sendFile(filteredImage, (err: Error) => {
             if (err) {
                 console.error(`There was a problem sending file: ${filteredImage}`, err.message);
                 return;
@@ -49,7 +49,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
             deleteLocalFiles([filteredImage]);
           });
         })
-        .catch(err => (res.status(500).send("There is a problem with source image.")));
+        .catch(() => (res.status(415).send("There is a problem with source image.")));
   });
 
 
